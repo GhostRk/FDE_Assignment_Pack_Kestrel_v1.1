@@ -1,0 +1,10 @@
+{
+  "name": "kestrel-control-tower",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Kestrel Supply Chain Control Tower",
+  "scripts": {
+    "start": "node backend/src/server.js",
+    "dev": "node --watch backend/src/server.js"
+  }
+}

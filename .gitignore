@@ -1,0 +1,4 @@
+node_modules/
+*.pyc
+data/kestrel_ops.db
+data/csv/
