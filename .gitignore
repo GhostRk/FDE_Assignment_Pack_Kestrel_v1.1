@@ -1,4 +1,11 @@
 node_modules/
 *.pyc
+01_Assignment_Brief.docx
+01_Assignment_Brief.md
+02_Data_Dictionary.md
+03_External_Sources.md
+README_START_HERE.md
+bazaarpulse_site/
+partner_api/
 data/kestrel_ops.db
 data/csv/
