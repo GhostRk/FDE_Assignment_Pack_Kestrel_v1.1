@@ -2,6 +2,18 @@
 
 This is the first Service API for the Kestrel control-tower assignment. It reads the supplied SQLite database without modifying it.
 
+## Supplied assessment assets
+
+The repository intentionally excludes the original assessment data and mock sources. Before running, place the following paths from the Kestrel assessment pack at the repository root:
+
+```text
+data/kestrel_ops.db
+bazaarpulse_site/
+partner_api/server.py
+```
+
+`data/kestrel_ops.db` is the operational database; `bazaarpulse_site/` supplies competitor-price listings; and `partner_api/server.py` supplies carrier freight invoices. They are excluded from Git because they are provided assessment assets rather than application code.
+
 ## Structure
 
 ```text
