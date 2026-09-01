@@ -1,7 +1,7 @@
 const { GoogleGenAI } = require('@google/genai');
 const { operationalTools, executeOperationalTool } = require('../services/askToolService');
 
-const MODEL = process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite';
+const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash-lite';
 const MAX_TOOL_ROUNDS = 4;
 const SYSTEM_INSTRUCTION = `You are Kestrel's supply-chain control-tower assistant.
 Answer only from an approved operational tool result. Never invent metrics, dates, causes, or comparisons.

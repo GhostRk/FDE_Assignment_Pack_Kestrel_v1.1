@@ -122,7 +122,7 @@ Configure your Google AI Studio key locally. Do not commit it. Copy the template
 cp .env.example .env
 ```
 
-Then open `.env` and replace the placeholder with your real key. The server loads `.env` automatically. `GEMINI_MODEL` is optional and defaults to `gemini-3.5-flash-lite`.
+Then open `.env` and replace the placeholder with your real key. The server loads `.env` automatically. `GEMINI_MODEL` is optional and defaults to `gemini-2.5-flash-lite`.
 
 ```bash
 curl -X POST 'http://localhost:3000/api/ask' \
