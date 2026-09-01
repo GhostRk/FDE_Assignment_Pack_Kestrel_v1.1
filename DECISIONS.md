@@ -17,7 +17,7 @@ All 76,889 completed orders have at least one short order line, including 65,896
 
 ## Deliberately not built yet
 
-The dashboard UI, freight/returns leakage, competitor-price ingestion, and ask-anything experience. The partner carrier API is also not yet ingested. I focused on auditable Service and Cold Chain vertical slices before adding breadth.
+The dashboard UI, competitor-price ingestion, and ask-anything experience. Freight invoice synchronisation and Money reporting are implemented, but carrier invoices have no delivery ID, so freight cost per case is limited to invoices matched by warehouse, route, and service date; unmatched invoice cost is surfaced separately.
 
 ## With two more weeks
 

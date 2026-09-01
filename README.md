@@ -36,6 +36,8 @@ The API starts at `http://localhost:3000`.
 GET /api/health
 GET /api/service/performance
 GET /api/cold-chain/overview
+GET /api/money/overview
+POST /api/money/sync-freight-invoices
 ```
 
 `/api/service/performance` defaults to Q1 FY 2026-27 (`2026-04-01` to `2026-06-30`) and groups by region.
@@ -72,4 +74,26 @@ Example:
 
 ```bash
 curl 'http://localhost:3000/api/cold-chain/overview?near_expiry_days=30'
+```
+
+## Money endpoints
+
+The Money API first synchronises invoices from the supplied carrier partner API into `backend/data/money.db`. This local application data is ignored by Git.
+
+Start the supplied partner API in another terminal:
+
+```bash
+python3 partner_api/server.py
+```
+
+Synchronise the desired invoice period. The partner service is deliberately paginated and intermittently rate-limited; the sync follows cursors and retries `429` and `503` responses.
+
+```bash
+curl -X POST 'http://localhost:3000/api/money/sync-freight-invoices?from=2026-04-01&to=2026-06-30'
+```
+
+Then retrieve freight cost per delivered case by carrier and return-credit leakage by category:
+
+```bash
+curl 'http://localhost:3000/api/money/overview?from=2026-04-01&to=2026-06-30'
 ```
