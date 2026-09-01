@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Send, Sparkles } from 'lucide-react';
 import { api } from '../../api/client';
+import { SectionHeader } from '../../components/SectionHeader';
 
 const SUGGESTIONS = [
   'Why did fill rate drop in West last week?',
