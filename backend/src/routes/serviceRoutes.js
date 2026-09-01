@@ -1,11 +1,8 @@
+const express = require('express');
 const { servicePerformance } = require('../controllers/serviceController');
 
-function routeServiceRequest(url) {
-  if (url.pathname !== '/api/service/performance') {
-    return null;
-  }
+const router = express.Router();
 
-  return servicePerformance(url.searchParams);
-}
+router.get('/performance', servicePerformance);
 
-module.exports = { routeServiceRequest };
+module.exports = router;

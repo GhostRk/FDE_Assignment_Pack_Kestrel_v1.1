@@ -1,41 +1,31 @@
-const { routeServiceRequest } = require('./routes/serviceRoutes');
+const express = require('express');
+const serviceRoutes = require('./routes/serviceRoutes');
 
-function sendJson(response, statusCode, body) {
-  response.writeHead(statusCode, {
-    'Content-Type': 'application/json; charset=utf-8',
-    'Access-Control-Allow-Origin': '*',
-  });
-  response.end(JSON.stringify(body, null, 2));
-}
+const app = express();
 
-function requestHandler(request, response) {
-  const url = new URL(request.url, `http://${request.headers.host || 'localhost'}`);
+app.use(express.json());
 
-  if (request.method !== 'GET') {
-    sendJson(response, 405, { error: 'Method not allowed' });
-    return;
-  }
+// Allows a separate frontend app to call this API during local development.
+app.use((request, response, next) => {
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+});
 
-  if (url.pathname === '/api/health') {
-    sendJson(response, 200, { status: 'ok' });
-    return;
-  }
+app.get('/api/health', (request, response) => {
+  response.json({ status: 'ok' });
+});
 
-  try {
-    const result = routeServiceRequest(url);
-    if (result) {
-      sendJson(response, 200, result);
-      return;
-    }
-  } catch (error) {
-    sendJson(response, 400, { error: error.message });
-    return;
-  }
+app.use('/api/service', serviceRoutes);
 
-  sendJson(response, 404, {
+app.use((request, response) => {
+  response.status(404).json({
     error: 'Not found',
     available_endpoints: ['/api/health', '/api/service/performance'],
   });
-}
+});
 
-module.exports = { requestHandler };
+app.use((error, request, response, next) => {
+  response.status(400).json({ error: error.message });
+});
+
+module.exports = app;

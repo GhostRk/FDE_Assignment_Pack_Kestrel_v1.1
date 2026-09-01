@@ -18,6 +18,12 @@ backend/src/
 
 Requires Node.js 22.5 or later (the project uses Node's built-in SQLite module).
 
+Install dependencies once:
+
+```bash
+npm install
+```
+
 ```bash
 npm start
 ```
