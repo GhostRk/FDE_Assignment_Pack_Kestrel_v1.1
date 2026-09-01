@@ -1,4 +1,6 @@
 node_modules/
+frontend/node_modules/
+frontend/dist/
 *.pyc
 01_Assignment_Brief.docx
 01_Assignment_Brief.md

@@ -30,6 +30,20 @@ npm start
 
 The API starts at `http://localhost:3000`.
 
+## Frontend dashboard
+
+The React/Vite dashboard is in `/frontend` and uses the backend through Vite's `/api` proxy.
+
+In a second terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173`. The dashboard presents all five business areas, defaults reporting to Q1 FY 2026-27, ranks poor results first, and provides data-quality warnings returned by the backend.
+
 ## Endpoints
 
 ```text

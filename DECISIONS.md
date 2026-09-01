@@ -17,7 +17,7 @@ All 76,889 completed orders have at least one short order line, including 65,896
 
 ## Deliberately not built yet
 
-The dashboard UI. Ask-anything uses Gemini function calling with only approved reporting tools; the model interprets a question and writes a response, while the backend executes the calculations. This prevents model-generated raw SQL and requires answers to be grounded in a tool result. Freight invoice synchronisation and Money reporting are implemented, but carrier invoices have no delivery ID, so freight cost per case is limited to invoices matched by warehouse, route, and service date; unmatched invoice cost is surfaced separately. Competitor-price ingestion is implemented from the supplied BazaarPulse site, using only pages allowed by `robots.txt`.
+A React one-screen control-tower dashboard plus backend reporting APIs. The dashboard defaults to Q1, ranks poor service results first, exposes data-quality warnings, and has distinct Service, Cold Chain, Money, Price Position, and Ask sections. Ask-anything uses Gemini function calling with only approved reporting tools; the model interprets a question and writes a response, while the backend executes the calculations. This prevents model-generated raw SQL and requires answers to be grounded in a tool result. Freight invoice synchronisation and Money reporting are implemented, but carrier invoices have no delivery ID, so freight cost per case is limited to invoices matched by warehouse, route, and service date; unmatched invoice cost is surfaced separately. Competitor-price ingestion is implemented from the supplied BazaarPulse site, using only pages allowed by `robots.txt`.
 
 ## Price-position matching
 
@@ -25,7 +25,7 @@ BazaarPulse listings have no Kestrel SKU key. A price comparison is reported onl
 
 ## With two more weeks
 
-Build the one-screen dashboard with Q1 default and immediate worst-performer rankings; add cold-chain and financial metrics; ingest carrier invoices with retries and idempotency; scrape the supplied competitor site on a scheduled job; introduce saved regional-manager filters and an evidence-backed question interface.
+Add role-aware saved regional-manager views; schedule carrier and price ingestion; persist question/evidence audit logs; broaden approved Ask tools and add evaluations; add automated API and UI tests.
 
 ## What breaks first in production
 
