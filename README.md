@@ -114,7 +114,15 @@ Supported cities are `Mumbai`, `Bengaluru`, `Delhi%20NCR`, and `Chennai`. A Kest
 
 ## Ask-anything endpoint
 
-The first grounded question flow supports the illustrative question from the client brief. It returns a concise answer and auditable evidence rather than an unsupported generated explanation.
+Ask uses Gemini function calling. Gemini interprets the question and writes the answer, but it must use a whitelisted operational tool; it never receives direct database access or raw-SQL capability.
+
+Configure your Google AI Studio key locally. Do not commit it:
+
+```bash
+export GEMINI_API_KEY='your-key-from-google-ai-studio'
+```
+
+`GEMINI_MODEL` is optional and defaults to `gemini-3.7-flash`.
 
 ```bash
 curl -X POST 'http://localhost:3000/api/ask' \
@@ -122,4 +130,10 @@ curl -X POST 'http://localhost:3000/api/ask' \
   -d '{"question":"Why did fill rate drop in West last week?"}'
 ```
 
-“Last week” is anchored to the final seven days available in the operational data. Unsupported questions return a `422` response and a list of supported question formats.
+Supported question areas are Service, Cold Chain, Money, and Price Position. The response includes an `interaction_id`; pass it as `previous_interaction_id` in a follow-up request to retain Gemini-managed conversation context:
+
+```bash
+curl -X POST 'http://localhost:3000/api/ask' \
+  -H 'Content-Type: application/json' \
+  -d '{"question":"Which routes were worst?","previous_interaction_id":"interaction-id-from-the-first-response"}'
+```

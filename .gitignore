@@ -10,3 +10,4 @@ partner_api/
 data/kestrel_ops.db
 data/csv/
 backend/data/
+.env
