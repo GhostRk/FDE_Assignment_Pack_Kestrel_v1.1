@@ -38,6 +38,8 @@ GET /api/service/performance
 GET /api/cold-chain/overview
 GET /api/money/overview
 POST /api/money/sync-freight-invoices
+GET /api/prices/position
+POST /api/prices/sync-competitor-prices
 ```
 
 `/api/service/performance` defaults to Q1 FY 2026-27 (`2026-04-01` to `2026-06-30`) and groups by region.
@@ -97,3 +99,14 @@ Then retrieve freight cost per delivered case by carrier and return-credit leaka
 ```bash
 curl 'http://localhost:3000/api/money/overview?from=2026-04-01&to=2026-06-30'
 ```
+
+## Price Position endpoints
+
+The price sync reads the provided BazaarPulse static site, respects its crawl policy by excluding `/internal/`, and stores observed listings in `backend/data/prices.db` (ignored by Git).
+
+```bash
+curl -X POST 'http://localhost:3000/api/prices/sync-competitor-prices'
+curl 'http://localhost:3000/api/prices/position?city=Mumbai'
+```
+
+Supported cities are `Mumbai`, `Bengaluru`, `Delhi%20NCR`, and `Chennai`. A Kestrel SKU is compared only with a non-Kestrel listing that exactly matches category, normalised product type, pack size, and unit.

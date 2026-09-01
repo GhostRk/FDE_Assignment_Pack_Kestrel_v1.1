@@ -17,7 +17,11 @@ All 76,889 completed orders have at least one short order line, including 65,896
 
 ## Deliberately not built yet
 
-The dashboard UI, competitor-price ingestion, and ask-anything experience. Freight invoice synchronisation and Money reporting are implemented, but carrier invoices have no delivery ID, so freight cost per case is limited to invoices matched by warehouse, route, and service date; unmatched invoice cost is surfaced separately.
+The dashboard UI and ask-anything experience. Freight invoice synchronisation and Money reporting are implemented, but carrier invoices have no delivery ID, so freight cost per case is limited to invoices matched by warehouse, route, and service date; unmatched invoice cost is surfaced separately. Competitor-price ingestion is implemented from the supplied BazaarPulse site, using only pages allowed by `robots.txt`.
+
+## Price-position matching
+
+BazaarPulse listings have no Kestrel SKU key. A price comparison is reported only where a non-Kestrel listing exactly matches a Kestrel SKU's category, normalised product type, pack size, and pack unit. This deliberately sacrifices coverage for auditability. The product master also contains multiple current Kestrel records with the same product signature but different MRP; they remain separate SKUs and are shown separately rather than arbitrarily deduplicated.
 
 ## With two more weeks
 

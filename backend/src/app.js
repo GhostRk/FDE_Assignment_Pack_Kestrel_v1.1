@@ -2,6 +2,7 @@ const express = require('express');
 const serviceRoutes = require('./routes/serviceRoutes');
 const coldChainRoutes = require('./routes/coldChainRoutes');
 const moneyRoutes = require('./routes/moneyRoutes');
+const priceRoutes = require('./routes/priceRoutes');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.get('/api/health', (request, response) => {
 app.use('/api/service', serviceRoutes);
 app.use('/api/cold-chain', coldChainRoutes);
 app.use('/api/money', moneyRoutes);
+app.use('/api/prices', priceRoutes);
 
 app.use((request, response) => {
   response.status(404).json({
@@ -30,6 +32,8 @@ app.use((request, response) => {
       '/api/cold-chain/overview',
       '/api/money/overview',
       '/api/money/sync-freight-invoices',
+      '/api/prices/position',
+      '/api/prices/sync-competitor-prices',
     ],
   });
 });
