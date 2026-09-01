@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Send, Sparkles } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 import { api } from '../../api/client';
 import { SectionHeader } from '../../components/SectionHeader';
 
@@ -31,7 +32,7 @@ export function AskPanel() {
     <SectionHeader eyebrow="05 · Ask anything" title="Ask in plain English" description="Gemini chooses from approved reporting tools. It does not access the database or run SQL." />
     <div className="ask-layout">
       <div><form onSubmit={submit} className="ask-form"><label htmlFor="question">What would you like to know?</label><textarea id="question" value={question} onChange={(event) => setQuestion(event.target.value)} rows="3" placeholder="Ask about service, cold chain, freight, returns, or pricing…" /><button className="primary-button" disabled={loading}><Send size={16} /> {loading ? 'Analysing…' : 'Ask Kestrel'}</button></form><div className="suggestions">{SUGGESTIONS.map((suggestion) => <button key={suggestion} onClick={() => setQuestion(suggestion)}>{suggestion}</button>)}</div></div>
-      <article className="answer-card"><Sparkles size={19} /><div><p className="eyebrow">Grounded answer</p>{answer ? <p>{answer}</p> : <p className="muted">Your answer will cite metrics returned by an approved backend reporting tool.</p>}{error && <p className="answer-error">{error}</p>}</div></article>
+      <article className="answer-card"><Sparkles size={19} /><div><p className="eyebrow">Grounded answer</p>{answer ? <div className="markdown-answer"><ReactMarkdown>{answer}</ReactMarkdown></div> : <p className="muted">Your answer will cite metrics returned by an approved backend reporting tool.</p>}{error && <p className="answer-error">{error}</p>}</div></article>
     </div>
   </section>;
 }
