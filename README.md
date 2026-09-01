@@ -35,6 +35,7 @@ The API starts at `http://localhost:3000`.
 ```text
 GET /api/health
 GET /api/service/performance
+GET /api/cold-chain/overview
 ```
 
 `/api/service/performance` defaults to Q1 FY 2026-27 (`2026-04-01` to `2026-06-30`) and groups by region.
@@ -54,3 +55,21 @@ curl 'http://localhost:3000/api/service/performance?group_by=region'
 ```
 
 The response reports fill rate in eaches, strict OTIF, and on-time delivery rate. It also exposes a data-quality warning: every completed source order has at least one short line, so strict OTIF is 0% for every group.
+
+## Cold Chain endpoint
+
+`/api/cold-chain/overview` defaults to Q1 FY 2026-27. It returns monthly temperature excursions per 100 chilled deliveries, near-expiry stock by warehouse, and cold-chain breach returns by product category.
+
+Optional query parameters:
+
+```text
+from=YYYY-MM-DD
+to=YYYY-MM-DD
+near_expiry_days=1..180
+```
+
+Example:
+
+```bash
+curl 'http://localhost:3000/api/cold-chain/overview?near_expiry_days=30'
+```
