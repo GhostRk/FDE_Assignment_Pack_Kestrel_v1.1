@@ -116,13 +116,13 @@ Supported cities are `Mumbai`, `Bengaluru`, `Delhi%20NCR`, and `Chennai`. A Kest
 
 Ask uses Gemini function calling. Gemini interprets the question and writes the answer, but it must use a whitelisted operational tool; it never receives direct database access or raw-SQL capability.
 
-Configure your Google AI Studio key locally. Do not commit it:
+Configure your Google AI Studio key locally. Do not commit it. Copy the template to `.env` (not `.env.example`):
 
 ```bash
-export GEMINI_API_KEY='your-key-from-google-ai-studio'
+cp .env.example .env
 ```
 
-`GEMINI_MODEL` is optional and defaults to `gemini-3.7-flash`.
+Then open `.env` and replace the placeholder with your real key. The server loads `.env` automatically. `GEMINI_MODEL` is optional and defaults to `gemini-3.5-flash-lite`.
 
 ```bash
 curl -X POST 'http://localhost:3000/api/ask' \

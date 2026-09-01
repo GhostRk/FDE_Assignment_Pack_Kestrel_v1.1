@@ -1,7 +1,7 @@
 const { GoogleGenAI } = require('@google/genai');
 const { operationalTools, executeOperationalTool } = require('../services/askToolService');
 
-const MODEL = process.env.GEMINI_MODEL || 'gemini-3.7-flash';
+const MODEL = process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite';
 const MAX_TOOL_ROUNDS = 4;
 const SYSTEM_INSTRUCTION = `You are Kestrel's supply-chain control-tower assistant.
 Answer only from an approved operational tool result. Never invent metrics, dates, causes, or comparisons.
@@ -69,7 +69,12 @@ async function askQuestion(request, response, next) {
 
     throw new Error('Gemini exceeded the maximum allowed tool rounds');
   } catch (error) {
-    next(error);
+    // Gemini errors are external-service failures, not client input errors.
+    response.status(502).json({
+      error: 'Gemini request failed',
+      provider_message: error.message,
+      model: MODEL,
+    });
   }
 }
 
