@@ -40,6 +40,7 @@ GET /api/money/overview
 POST /api/money/sync-freight-invoices
 GET /api/prices/position
 POST /api/prices/sync-competitor-prices
+POST /api/ask
 ```
 
 `/api/service/performance` defaults to Q1 FY 2026-27 (`2026-04-01` to `2026-06-30`) and groups by region.
@@ -110,3 +111,15 @@ curl 'http://localhost:3000/api/prices/position?city=Mumbai'
 ```
 
 Supported cities are `Mumbai`, `Bengaluru`, `Delhi%20NCR`, and `Chennai`. A Kestrel SKU is compared only with a non-Kestrel listing that exactly matches category, normalised product type, pack size, and unit.
+
+## Ask-anything endpoint
+
+The first grounded question flow supports the illustrative question from the client brief. It returns a concise answer and auditable evidence rather than an unsupported generated explanation.
+
+```bash
+curl -X POST 'http://localhost:3000/api/ask' \
+  -H 'Content-Type: application/json' \
+  -d '{"question":"Why did fill rate drop in West last week?"}'
+```
+
+“Last week” is anchored to the final seven days available in the operational data. Unsupported questions return a `422` response and a list of supported question formats.

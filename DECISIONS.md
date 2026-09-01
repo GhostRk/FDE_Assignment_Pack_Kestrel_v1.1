@@ -17,7 +17,7 @@ All 76,889 completed orders have at least one short order line, including 65,896
 
 ## Deliberately not built yet
 
-The dashboard UI and ask-anything experience. Freight invoice synchronisation and Money reporting are implemented, but carrier invoices have no delivery ID, so freight cost per case is limited to invoices matched by warehouse, route, and service date; unmatched invoice cost is surfaced separately. Competitor-price ingestion is implemented from the supplied BazaarPulse site, using only pages allowed by `robots.txt`.
+The dashboard UI and a general-purpose ask-anything experience. The implemented Ask endpoint supports the brief's fill-rate-drop question with deterministic, evidence-backed analysis rather than an LLM that could invent operational explanations. Freight invoice synchronisation and Money reporting are implemented, but carrier invoices have no delivery ID, so freight cost per case is limited to invoices matched by warehouse, route, and service date; unmatched invoice cost is surfaced separately. Competitor-price ingestion is implemented from the supplied BazaarPulse site, using only pages allowed by `robots.txt`.
 
 ## Price-position matching
 
